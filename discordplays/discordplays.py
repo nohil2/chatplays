@@ -8,6 +8,7 @@ import pydirectinput as pydi
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+INTENTS = discord.Intents(messages=True, message_content=True, guilds=True)
 CONTROLS = json.loads(os.getenv('CONTROL_DICTIONARY'))
 MODERATOR = os.getenv('MODERATOR_ROLE')
 QUEUE = queue.Queue(maxsize=100)
@@ -18,7 +19,7 @@ class DiscordBot(commands.Bot):
     listening = False
 
     def __init__(self):
-        super().__init__(command_prefix='!')
+        super().__init__(command_prefix='!', intents=INTENTS)
 
         # commands
         @self.command()
